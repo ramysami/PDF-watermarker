@@ -1,7 +1,5 @@
-# pdf_watermarker.py
-
 from PyPDF2 import PdfFileWriter, PdfFileReader
-from os import listdir
+from os import listdir, path, makedirs
 
 def create_watermark(input_pdf, output, watermark):
     watermark_obj = PdfFileReader(watermark)
@@ -23,6 +21,9 @@ file = 'input.pdf'
 
 wmarks = [f"input/{file_name}" for file_name in listdir("input")]
 outs = [f"output/{file_name}" for file_name in listdir("input")]
+
+if not path.exists('output'):
+    makedirs('output')
 
 for wmark, out in zip(wmarks, outs):
     create_watermark(
