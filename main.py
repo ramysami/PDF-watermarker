@@ -19,19 +19,22 @@ def create_watermark(input_pdf, output, watermark):
         pdf_writer.write(out)
 
 
-file = 'input.pdf'
-
-wmarks = [f"input/{file_name}" for file_name in listdir("input")]
-outs = [f"output/{file_name}" for file_name in listdir("input")]
-
 if not path.exists('output'):
     makedirs('output')
+if not path.exists('input'):
+    makedirs('input')
 
-for wmark, out in zip(wmarks, outs):
-    print('Adding watermark to ' + wmark)
-    create_watermark(
-        input_pdf=file,
-        output=out,
-        watermark=wmark
-    )
+input_names_list = listdir("input")
+# input_name_path_list = [f"input/{file_name}" for file_name in listdir("input")]
+wmarks = [f"watermarks/{file_name}" for file_name in listdir("watermarks")]
+outs = [f"output/{file_name}" for file_name in listdir("watermarks")]
+
+for input in input_names_list:
+    for wmark, out in zip(wmarks, outs):
+        print('Adding watermark to ' + out + ' ' + input)
+        create_watermark(
+            input_pdf=f'input/{input}',
+            output=f'{out} {input}',
+            watermark=wmark
+        )
 print("Done")
