@@ -31,11 +31,12 @@ watermarks_names_list = listdir("watermarks")
 # outs = [f"output/{file_name}" for file_name in listdir("watermarks")]
 
 for input in input_names_list:
+    clean_name = path.splitext(input)[0]
     for wmark in watermarks_names_list:
-        print('Adding watermark to ' + input + ' ' + wmark)
+        print('Adding watermark to ' + clean_name + ' ' + wmark)
         create_watermark(
             input_pdf=f'input/{input}',
-            output=f'output/{input} {wmark}',
+            output=f'output/{clean_name} {wmark}',
             watermark=f'watermarks/{wmark}'
         )
 print("Done")
