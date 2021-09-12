@@ -26,15 +26,16 @@ if not path.exists('input'):
 
 input_names_list = listdir("input")
 # input_name_path_list = [f"input/{file_name}" for file_name in listdir("input")]
-wmarks = [f"watermarks/{file_name}" for file_name in listdir("watermarks")]
-outs = [f"output/{file_name}" for file_name in listdir("watermarks")]
+# wmarks = [f"watermarks/{file_name}" for file_name in listdir("watermarks")]
+watermarks_names_list = listdir("watermarks")
+# outs = [f"output/{file_name}" for file_name in listdir("watermarks")]
 
 for input in input_names_list:
-    for wmark, out in zip(wmarks, outs):
-        print('Adding watermark to ' + out + ' ' + input)
+    for wmark in watermarks_names_list:
+        print('Adding watermark to ' + input + ' ' + wmark)
         create_watermark(
             input_pdf=f'input/{input}',
-            output=f'{out} {input}',
-            watermark=wmark
+            output=f'output/{input} {wmark}',
+            watermark=f'watermarks/{wmark}'
         )
 print("Done")
